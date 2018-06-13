@@ -3,6 +3,7 @@
     "start": "PORT=8010 roadhog dev"
   },
   "dependencies": {
+    "@momenta/react-modal-manager": "^0.1.0",
     "antd": "^3.6.2",
     "babel-plugin-import": "^1.8.0",
     "react": "^16.4.0",

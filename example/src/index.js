@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom'
 import { Button, Modal } from 'antd'
-import ModalManager, { showModal } from '../../lib'
+import ModalManager, { showModal } from '@momenta/react-modal-manager'
 import 'antd/dist/antd.css'
 
 let index = 1
 
 const DemoModal = ({ id, closeModal }) => (
-  <Modal title="Basic Modal" visible={true} mask={false} maskClosable={false} onOk={closeModal} onCancel={closeModal}>
+  <Modal title="Basic Modal" visible={true} onOk={closeModal} onCancel={closeModal}>
     <p>Modal {id}</p>
   </Modal>
 )

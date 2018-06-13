@@ -1,41 +1,46 @@
 import React from 'react'
 import { createSubscription } from 'create-subscription'
 
-let modals = []
+class Manager {
+  counter = 0
+  modals = []
+  add = modal => {
+    const index = this.counter++
+    const modalId = window.Symbol ? Symbol(index) : index
+    const close = closeModal.bind(null, modalId)
+    modal = React.cloneElement(modal, { key: index, closeModal: close })
+    this.modals = this.modals.concat({ modalId, modal })
+    this.onChanged(this.modals)
+    return modalId
+  }
+  remove = modalId => {
+    this.modals = this.modals.filter(p => p.modalId !== modalId)
+    this.onChanged(this.modals)
+  }
+  onChanged = () => {}
+}
 
-let counter = 0
+const manager = new Manager()
 
-let onModalsChange = () => {}
-
-const createModalId = id => (window.Symbol ? Symbol(id) : id)
-
-export function showModal(modal) {
-  // console.log('showModal', modal, modals)
+export const showModal = modal => {
+  // console.log('showModal', modal, manager.modals)
   let el = modal
   if (!React.isValidElement(modal)) {
     el = () => modal
   }
-  const modal_id = counter++
-  const symbol_modal_id = createModalId(modal_id)
-  const close = closeModal.bind(null, symbol_modal_id)
-  modal = React.cloneElement(modal, { key: modal_id, __modal_id: symbol_modal_id, closeModal: close })
-
-  modals = modals.concat(modal)
-  onModalsChange(modals)
-  return symbol_modal_id
+  return manager.add(modal)
 }
 
-export function closeModal(modal_id) {
+export const closeModal = modal_id => {
   // console.log('closeModal', modal_id)
-  modals = modals.filter(p => p.props.__modal_id !== modal_id)
-  onModalsChange(modals)
+  manager.remove(modal_id)
 }
 
-const ModalSubscription = createSubscription({
-  getCurrentValue: _ => modals,
-  subscribe: (_, callback) => {
+const Subscription = createSubscription({
+  getCurrentValue: manager => manager.modals,
+  subscribe: (manager, callback) => {
     // console.log('subscribe')
-    onModalsChange = modals => {
+    manager.onChanged = modals => {
       // console.log('onModalsChange', modals)
       callback(modals)
     }
@@ -43,12 +48,4 @@ const ModalSubscription = createSubscription({
   }
 })
 
-export default props => (
-  <ModalSubscription source={modals}>
-    {modals => (
-      <div className={props.className} style={props.style}>
-        {modals}
-      </div>
-    )}
-  </ModalSubscription>
-)
+export default () => <Subscription source={manager}>{modals => <React.Fragment>{modals.map(p => p.modal)}</React.Fragment>}</Subscription>
