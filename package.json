@@ -1,6 +1,7 @@
 {
   "name": "react-modal-magager",
   "version": "0.1.0",
+  "main": "libs/index.js",
   "scripts": {
     "babel": "babel src --out-dir lib",
     "prettier": "prettier --write '**/*.@(js|json|ts)'"
