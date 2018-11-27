@@ -1,6 +1,6 @@
 {
   "name": "@momenta/react-modal-manager",
-  "version": "0.3.0.alpha0",
+  "version": "0.3.0",
   "main": "lib/index.js",
   "scripts": {
     "babel": "babel src --out-dir lib",

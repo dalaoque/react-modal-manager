@@ -20,6 +20,7 @@ class Manager {
 
   removeAll = () => {
     this.modals = []
+    this.onChanged(this.modals)
   }
 
   onChanged = () => {}
