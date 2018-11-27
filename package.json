@@ -1,13 +1,13 @@
 {
   "name": "@momenta/react-modal-manager",
-  "version": "0.2.0",
+  "version": "0.3.0.alpha0",
   "main": "lib/index.js",
   "scripts": {
     "babel": "babel src --out-dir lib",
     "prettier": "prettier --write '**/*.@(js|json|ts)'"
   },
   "dependencies": {
-    "create-subscription": "^16.4.0"
+    "create-subscription": "^16.6.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -17,6 +17,6 @@
     "babel-preset-react": "^6.24.1"
   },
   "peerDependencies": {
-    "react": "^16.4.0"
+    "react": "^16.6.0"
   }
 }

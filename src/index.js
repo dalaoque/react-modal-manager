@@ -17,6 +17,11 @@ class Manager {
     this.modals = this.modals.filter(p => p.modalId !== modalId)
     this.onChanged(this.modals)
   }
+
+  removeAll = () => {
+    this.modals = []
+  }
+
   onChanged = () => {}
 }
 
@@ -34,6 +39,10 @@ export const showModal = modal => {
 export const closeModal = modal_id => {
   // console.log('closeModal', modal_id)
   manager.remove(modal_id)
+}
+
+export const closeAllModals = () => {
+  manager.removeAll()
 }
 
 const Subscription = createSubscription({
