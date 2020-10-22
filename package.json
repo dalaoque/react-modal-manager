@@ -7,7 +7,7 @@
     "prettier": "prettier --write '**/*.@(js|json|ts)'"
   },
   "dependencies": {
-    "create-subscription": "^16.6.3"
+    "create-subscription": "^17.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
